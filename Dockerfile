@@ -20,7 +20,7 @@ RUN apt-get update && \
 
 # PHP Extensions (curl, mbstring, hash, simplexml, xml, json, iconv are already installed in php:7.0.11 image)
 RUN docker-php-ext-configure \
-  gd --with-freetype-dir=/usr/include/ --with-jpeg-dir=/usr/include/
+  gd --with-jpeg-dir=/usr/include/
 
 RUN docker-php-ext-install \
     gd \
