@@ -6,6 +6,7 @@ RUN apt-get update && \
     DEBIAN_FRONTEND=noninteractive apt-get install -y \
     openssh-client \
     git-core \
+    mysql-client \
     libcurl4-openssl-dev \
     libfreetype6-dev \
     libicu-dev \
@@ -13,7 +14,8 @@ RUN apt-get update && \
     libmcrypt-dev \
     libpng12-dev \
     libxslt1-dev \
-    libxml2-dev && \
+    libxml2-dev \
+    libgd2-xpm-dev && \
     rm -r /var/lib/apt/lists/*
 
 # PHP Extensions (curl, mbstring, hash, simplexml, xml, json, iconv are already installed in php:7.0.11 image)
