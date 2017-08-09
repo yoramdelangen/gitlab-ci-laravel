@@ -1,4 +1,4 @@
-FROM php:7.0
+FROM php:7.1
 
 MAINTAINER Kamil Kijowski <kl.kijowski@gmail.com>
 
@@ -18,7 +18,7 @@ RUN apt-get update && \
     libgd2-xpm-dev && \
     rm -r /var/lib/apt/lists/*
 
-# PHP Extensions (curl, mbstring, hash, simplexml, xml, json, iconv are already installed in php:7.0.11 image)
+# PHP Extensions (curl, mbstring, hash, simplexml, xml, json, iconv are already installed in php image)
 RUN docker-php-ext-configure \
   gd --with-jpeg-dir=/usr/include/
 
