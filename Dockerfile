@@ -1,6 +1,6 @@
 FROM php:7.1
 
-MAINTAINER Kamil Kijowski <kl.kijowski@gmail.com>
+MAINTAINER Mark Wienk <mark@wienk.nl>
 
 RUN apt-get update && \
     DEBIAN_FRONTEND=noninteractive apt-get install -y \
