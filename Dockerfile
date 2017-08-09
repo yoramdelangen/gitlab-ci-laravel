@@ -24,6 +24,7 @@ RUN docker-php-ext-configure \
 
 RUN docker-php-ext-install \
     gd \
+    bz2 \
     intl \
     mcrypt \
     pdo_mysql \
