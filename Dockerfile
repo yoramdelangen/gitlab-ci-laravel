@@ -7,6 +7,7 @@ RUN apt-get update && \
     openssh-client \
     git-core \
     mysql-client \
+    libbz2-dev \
     libcurl4-openssl-dev \
     libfreetype6-dev \
     libicu-dev \
