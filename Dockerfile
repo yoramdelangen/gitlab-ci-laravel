@@ -21,7 +21,7 @@ RUN apt-get update && \
 
 # PHP Extensions (curl, mbstring, hash, simplexml, xml, json, iconv are already installed in php image)
 RUN docker-php-ext-configure \
-  gd --with-jpeg-dir=/usr/include/
+    gd --with-jpeg-dir=/usr/include/
 
 RUN docker-php-ext-install \
     gd \
@@ -29,6 +29,7 @@ RUN docker-php-ext-install \
     intl \
     mcrypt \
     pdo_mysql \
+    pcntl \
     soap \
     xsl \
     zip
