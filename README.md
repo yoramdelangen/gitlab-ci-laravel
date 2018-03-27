@@ -1,1 +1,1 @@
-# gitlab-ci-magento2
+# gitlab-ci-laravel
