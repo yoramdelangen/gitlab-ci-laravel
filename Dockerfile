@@ -14,6 +14,7 @@ RUN apt-get update && \
     libjpeg62-turbo-dev \
     libmcrypt-dev \
     libpng12-dev \
+    libpng16-dev \
     libxslt1-dev \
     libxml2-dev \
     libgd2-xpm-dev \
