@@ -16,9 +16,9 @@ RUN apt-get update && \
     libpng12-dev \
     libxslt1-dev \
     libxml2-dev \
-    libgd2-xpm-dev && \
-    autoconf && \
-    autogen && \
+    libgd2-xpm-dev \
+    autoconf \
+    autogen \
     intltool && \
     rm -r /var/lib/apt/lists/*
 
