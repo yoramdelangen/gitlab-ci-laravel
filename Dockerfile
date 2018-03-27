@@ -15,6 +15,7 @@ RUN apt-get update && \
     libmcrypt-dev \
     libpng12-dev \
     libpng-dev \
+    make \
     libxslt1-dev \
     libxml2-dev \
     libgd2-xpm-dev \
