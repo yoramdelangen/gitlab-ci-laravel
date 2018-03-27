@@ -17,6 +17,9 @@ RUN apt-get update && \
     libxslt1-dev \
     libxml2-dev \
     libgd2-xpm-dev && \
+    autoconf && \
+    autogen && \
+    intltool && \
     rm -r /var/lib/apt/lists/*
 
 # PHP Extensions (curl, mbstring, hash, simplexml, xml, json, iconv are already installed in php image)
