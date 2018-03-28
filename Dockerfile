@@ -5,6 +5,7 @@ MAINTAINER Yoram de Langen <yoram@brandcube.nl>
 
 RUN apt-get update && \
     DEBIAN_FRONTEND=noninteractive apt-get install -y \
+    curl \
     openssh-client \
     git-core \
     mysql-client \
@@ -23,6 +24,20 @@ RUN apt-get update && \
     nasm g++ gcc \
     automake autogen autoconf libtool intltool \
     &&  rm -r /var/lib/apt/lists/*
+
+ENV YARN_VERSION=latest
+
+# Install NodeJS, NPM and
+RUN curl -sL https://deb.nodesource.com/setup_9.x | bash - && \
+	apt-get install -y nodejs
+# Start installing Yarn - copied from mhart/alpine-node
+# @TODO fix this
+# RUN curl -sf -o yarn-latest.tar.gz https://yarnpkg.com/latest.tar.gz && \
+# 	mkdir -p /usr/local/share/yarn && \
+# 	tar -xf yarn-latest.tar.gz -C /usr/local/share/yarn --strip 1 && \
+# 	ln -s /usr/local/share/yarn/bin/yarn /usr/local/bin/ && \
+# 	ln -s /usr/local/share/yarn/bin/yarnpkg /usr/local/bin/ && \
+# 	rm yarn-latest.tar.gz;
 
 # PHP Extensions (curl, mbstring, hash, simplexml, xml, json, iconv are already installed in php image)
 RUN docker-php-ext-configure \
