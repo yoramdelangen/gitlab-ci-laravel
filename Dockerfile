@@ -20,8 +20,8 @@ RUN apt-get update && \
     libxml2-dev \
     libgd2-xpm-dev \
     cmake make \
-    nasm g++ \
-    automake autogen autoconf libtool \
+    nasm g++ gcc \
+    automake autogen autoconf libtool intltool \
     &&  rm -r /var/lib/apt/lists/*
 
 # PHP Extensions (curl, mbstring, hash, simplexml, xml, json, iconv are already installed in php image)
