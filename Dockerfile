@@ -1,6 +1,7 @@
 FROM php:7.1
 
 MAINTAINER Mark Wienk <mark@wienk.nl>
+MAINTAINER Yoram de Langen <yoram@brandcube.nl>
 
 RUN apt-get update && \
     DEBIAN_FRONTEND=noninteractive apt-get install -y \
@@ -15,14 +16,13 @@ RUN apt-get update && \
     libmcrypt-dev \
     libpng12-dev \
     libpng-dev \
-    make \
     libxslt1-dev \
     libxml2-dev \
     libgd2-xpm-dev \
-    autoconf \
-    autogen \
-    intltool && \
-    rm -r /var/lib/apt/lists/*
+    cmake make \
+    nasm g++ \
+    automake autogen autoconf libtool \
+    &&  rm -r /var/lib/apt/lists/*
 
 # PHP Extensions (curl, mbstring, hash, simplexml, xml, json, iconv are already installed in php image)
 RUN docker-php-ext-configure \
