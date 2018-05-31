@@ -23,6 +23,7 @@ RUN apt-get update && \
     cmake make \
     nasm g++ gcc \
     automake autogen autoconf libtool intltool \
+    jq \
     &&  rm -r /var/lib/apt/lists/*
 
 ENV YARN_VERSION=latest
@@ -30,14 +31,11 @@ ENV YARN_VERSION=latest
 # Install NodeJS, NPM and
 RUN curl -sL https://deb.nodesource.com/setup_9.x | bash - && \
 	apt-get install -y nodejs
-# Start installing Yarn - copied from mhart/alpine-node
-# @TODO fix this
-# RUN curl -sf -o yarn-latest.tar.gz https://yarnpkg.com/latest.tar.gz && \
-# 	mkdir -p /usr/local/share/yarn && \
-# 	tar -xf yarn-latest.tar.gz -C /usr/local/share/yarn --strip 1 && \
-# 	ln -s /usr/local/share/yarn/bin/yarn /usr/local/bin/ && \
-# 	ln -s /usr/local/share/yarn/bin/yarnpkg /usr/local/bin/ && \
-# 	rm yarn-latest.tar.gz;
+
+# Installing Yarn
+RUN curl -sS https://dl.yarnpkg.com/debian/pubkey.gpg | apt-key add - && \
+    echo "deb https://dl.yarnpkg.com/debian/ stable main" | tee /etc/apt/sources.list.d/yarn.list && \
+    apt-get update && apt-get install -y yarn
 
 # PHP Extensions (curl, mbstring, hash, simplexml, xml, json, iconv are already installed in php image)
 RUN docker-php-ext-configure \
@@ -70,5 +68,4 @@ RUN curl -sS https://getcomposer.org/installer | php -- --install-dir=/usr/local
 # Goto temporary directory.
 WORKDIR /tmp
 
-RUN php --version
-RUN composer --version
+RUN echo ">>>PHP:\n$(php --version)\n\n>>>COMPOSER:\n$(composer --version)\n\n>>>NODE:\n$(node -v)\n\n>>>YARN:\n$(yarn -v)"
