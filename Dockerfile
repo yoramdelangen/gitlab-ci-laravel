@@ -69,3 +69,5 @@ RUN curl -sS https://getcomposer.org/installer | php -- --install-dir=/usr/local
 WORKDIR /tmp
 
 RUN echo ">>>PHP:\n$(php --version)\n\n>>>COMPOSER:\n$(composer --version)\n\n>>>NODE:\n$(node -v)\n\n>>>YARN:\n$(yarn -v)"
+
+RUN jq --version
