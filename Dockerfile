@@ -5,7 +5,7 @@ MAINTAINER Yoram de Langen <yoram@brandcube.nl>
 
 RUN apt-get update && \
     DEBIAN_FRONTEND=noninteractive apt-get install -y \
-    php7.2-bcmath \
+    php-bcmath \
     curl \
     gnupg \
     openssh-client \
