@@ -1,11 +1,11 @@
-FROM php:7.2
+FROM php:7.3
 
 MAINTAINER Mark Wienk <mark@wienk.nl>
 MAINTAINER Yoram de Langen <yoram@brandcube.nl>
 
 RUN apt-get update && \
     DEBIAN_FRONTEND=noninteractive apt-get install -y \
-    php-bcmath \
+    php7.3-bcmath \
     curl \
     gnupg \
     openssh-client \
