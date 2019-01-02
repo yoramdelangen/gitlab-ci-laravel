@@ -1,4 +1,4 @@
-FROM php:7.3
+FROM php:7.2
 
 MAINTAINER Mark Wienk <mark@wienk.nl>
 MAINTAINER Yoram de Langen <yoram@brandcube.nl>
@@ -24,6 +24,7 @@ RUN apt-get update && \
     nasm g++ gcc \
     automake autogen autoconf libtool intltool \
     jq \
+    apt-utils \
     &&  rm -r /var/lib/apt/lists/*
 
 ENV YARN_VERSION=latest
