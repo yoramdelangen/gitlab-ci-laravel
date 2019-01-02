@@ -5,7 +5,6 @@ MAINTAINER Yoram de Langen <yoram@brandcube.nl>
 
 RUN apt-get update && \
     DEBIAN_FRONTEND=noninteractive apt-get install -y \
-    php7.3-bcmath \
     curl \
     gnupg \
     openssh-client \
@@ -30,13 +29,9 @@ RUN apt-get update && \
 ENV YARN_VERSION=latest
 
 # Install NodeJS, NPM and
-RUN curl -sL https://deb.nodesource.com/setup_9.x | bash - && \
-	apt-get install -y nodejs
-
-# Installing Yarn
-RUN curl -sS https://dl.yarnpkg.com/debian/pubkey.gpg | apt-key add - && \
-    echo "deb https://dl.yarnpkg.com/debian/ stable main" | tee /etc/apt/sources.list.d/yarn.list && \
-    apt-get update && apt-get install -y yarn
+RUN curl -sL https://deb.nodesource.com/setup_10.x | bash -
+RUN apt-get install -yqq npm
+RUN npm install -g yarn gulp
 
 # PHP Extensions (curl, mbstring, hash, simplexml, xml, json, iconv are already installed in php image)
 RUN docker-php-ext-configure \
@@ -51,7 +46,8 @@ RUN docker-php-ext-install \
     pcntl \
     soap \
     xsl \
-    zip
+    zip \
+    bcmath
 
 # PHP Configuration
 RUN echo "memory_limit=-1" > $PHP_INI_DIR/conf.d/memory-limit.ini
@@ -61,10 +57,15 @@ VOLUME /root/composer
 
 # Environmental Variables
 ENV COMPOSER_HOME /root/composer
+ENV COMPOSER_CACHE_DIR /cache
+ENV PATH /root/.composer/vendor/bin:$PATH
 
 # Install Composer
 RUN curl -sS https://getcomposer.org/installer | php -- --install-dir=/usr/local/bin --filename=composer && \
 	composer selfupdate
+
+# Install composer parallel downloads
+RUN composer global require "hirak/prestissimo:^0.3"
 
 # Goto temporary directory.
 WORKDIR /tmp
