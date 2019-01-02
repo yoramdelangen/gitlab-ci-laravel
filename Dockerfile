@@ -1,10 +1,11 @@
-FROM php:7.2
+FROM php:7.2-fpm
 
 MAINTAINER Mark Wienk <mark@wienk.nl>
 MAINTAINER Yoram de Langen <yoram@brandcube.nl>
 
 RUN apt-get update && \
     DEBIAN_FRONTEND=noninteractive apt-get install -y \
+    --no-install-recommends \
     curl \
     gnupg \
     openssh-client \
@@ -24,14 +25,16 @@ RUN apt-get update && \
     nasm g++ gcc \
     automake autogen autoconf libtool intltool \
     jq \
-    apt-utils \
-    &&  rm -r /var/lib/apt/lists/*
+    apt-utils
+
+# Cleanup apt-get
+RUN apt-get clean && rm -rf /var/lib/apt/lists/* /tmp/* /var/tmp/*
 
 ENV YARN_VERSION=latest
 
 # Install NodeJS, NPM and
 RUN curl -sL https://deb.nodesource.com/setup_10.x | bash -
-RUN apt-get install -yqq npm
+RUN apt-get install -y npm
 RUN npm install -g yarn gulp
 
 # PHP Extensions (curl, mbstring, hash, simplexml, xml, json, iconv are already installed in php image)
@@ -42,7 +45,6 @@ RUN docker-php-ext-install \
     gd \
     bz2 \
     intl \
-    mcrypt \
     pdo_mysql \
     pcntl \
     soap \
